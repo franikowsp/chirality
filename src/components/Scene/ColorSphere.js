@@ -7,7 +7,7 @@ export default function ColorSphere({ position }) {
   return (
     <mesh
       position={position}
-      onClick={(e) => {
+      onDoubleClick={(e) => {
         e.stopPropagation();
         setClick(!click);
       }}
