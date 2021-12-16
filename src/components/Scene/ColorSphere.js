@@ -46,9 +46,7 @@ export default function ColorSphere({
             parentGenerationId: generationId,
             direction: direction,
           });
-          if (baseNode) {
-            setHasChiral(true);
-          }
+          setHasChiral(true);
         } else if (remove) {
           removeChirals({
             parentGeneration: generation,
