@@ -22,14 +22,16 @@ export default function Scene() {
         <color attach="background" args={[0.8, 0.8, 0.8]} />
         <ambientLight color={[1, 1, 1]} intensity={0.5} />
         <directionalLight color={[1, 1, 1]} position={[0, 1, 1]} />
-        <ColorSphere position={[0, 0, 0]} />
+        <ColorSphere position={[0, 0, 0]} baseNode="true" direction="down" />
         {chirals.map((d, i) => {
           return (
             <React.Fragment key={`chiral-${i}`}>
               <ChiralStructure
+                direction={d.direction}
                 position={d.position}
                 rotation={d.rotation}
                 groupRotation={d.groupRotation}
+                parentGeneration={d.parentGeneration}
               />
               ;
             </React.Fragment>

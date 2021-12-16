@@ -3,32 +3,40 @@ import ColorSphere from "./ColorSphere.js";
 
 import { degToRad } from "three/src/math/MathUtils";
 
-const clockArray = [0, 120, 240].map((d) => {
-  const rad = degToRad(d);
-  const radius = 10;
-  const distance = 15;
+const clockArrayGenerate = (direction) => {
+  // const degrees = direction === "up" ? [0, 120, 240] : [60, 180, 300];
 
-  const cylinderAngleX = -Math.atan(radius / distance);
-  const cylinderAngleY = -rad;
+  return [0, 120, 240].map((d) => {
+    const rad = degToRad(d);
+    const radius = 10;
+    const distance = direction === "up" ? 15 : -15;
 
-  const x = Math.sin(rad) * radius,
-    y = distance,
-    z = -Math.cos(rad) * radius;
+    const cylinderAngleX = -Math.atan(radius / distance);
+    const cylinderAngleY = -rad;
 
-  return {
-    height: Math.sqrt(radius ** 2 + distance ** 2),
-    positionSphere: [x, y, z],
-    positionCylinderGroup: [x / 2, y / 2, z / 2],
-    rotationCylinder: [cylinderAngleX, 0, 0],
-    rotationCylinderGroup: [0, cylinderAngleY, 0],
-  };
-});
+    const x = Math.sin(rad) * radius,
+      y = distance,
+      z = -Math.cos(rad) * radius;
+
+    return {
+      height: Math.sqrt(radius ** 2 + distance ** 2),
+      positionSphere: [x, y, z],
+      positionCylinderGroup: [x / 2, y / 2, z / 2],
+      rotationCylinder: [cylinderAngleX, 0, 0],
+      rotationCylinderGroup: [0, cylinderAngleY, 0],
+    };
+  });
+};
 
 export default function ChiralStructure({
+  direction = "up",
   position = [0, 0, 0],
   rotation = [0, 0, 0],
   groupRotation = [0, 0, 0],
+  parentGeneration = 0,
 }) {
+  const clockArray = clockArrayGenerate(direction);
+
   return (
     <group position={position} rotation={groupRotation}>
       <group rotation={rotation}>
@@ -38,12 +46,12 @@ export default function ChiralStructure({
               key={`orb-connection-${d.positionSphere.join("-")}`}
             >
               <ColorSphere
-                parentPosition={position}
                 position={d.positionSphere}
                 rotation={d.rotationCylinder}
-                parentRotation={rotation}
                 groupRotation={d.rotationCylinderGroup}
-                parentGroupRotation={groupRotation}
+                generation={parentGeneration + 1}
+                generationId={i}
+                direction={direction}
               />
               <group
                 rotation={d.rotationCylinderGroup}
