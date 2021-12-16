@@ -2,6 +2,7 @@
   "name": "chirality",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://franikowsp.github.io/chirality",
   "dependencies": {
     "@react-three/drei": "^8.2.1",
     "@react-three/fiber": "^7.0.24",
@@ -18,6 +19,8 @@
     "zustand": "^3.6.7"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -40,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
   }
 }
