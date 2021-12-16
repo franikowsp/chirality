@@ -25,7 +25,9 @@ export default function Scene() {
         <ColorSphere position={[0, 0, 0]} baseNode="true" direction="down" />
         {chirals.map((d, i) => {
           return (
-            <React.Fragment key={`chiral-${i}`}>
+            <React.Fragment
+              key={`chiral-${d.direction}-${d.parentGeneration}-${i}`}
+            >
               <ChiralStructure
                 direction={d.direction}
                 position={d.position}

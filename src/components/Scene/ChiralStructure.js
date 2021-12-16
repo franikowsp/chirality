@@ -43,7 +43,7 @@ export default function ChiralStructure({
         {clockArray.map((d, i) => {
           return (
             <React.Fragment
-              key={`orb-connection-${d.positionSphere.join("-")}`}
+              key={`orb-connection-${direction}-${parentGeneration}-${i}`}
             >
               <ColorSphere
                 position={d.positionSphere}
