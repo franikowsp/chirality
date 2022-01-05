@@ -2,6 +2,7 @@ import React from "react";
 
 import Controls from "./Interface/Controls";
 import ColorSelection from "./Interface/ColorSelection";
+import RotationSlider from "./Interface/RotationSlider";
 
 export default function Interface() {
   return (
@@ -16,6 +17,9 @@ export default function Interface() {
             <Controls />
           </g>
         </svg>
+        <div>
+          <RotationSlider />
+        </div>
       </div>
     </>
   );

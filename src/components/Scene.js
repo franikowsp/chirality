@@ -7,9 +7,11 @@ import ChiralStructure from "./Scene/ChiralStructure.js";
 import ColorSphere from "./Scene/ColorSphere.js";
 
 import useChiralStore from "../stores/useChiralStore.js";
+import useRotationStore from "../stores/useRotationStore.js";
 
 export default function Scene() {
   const { chirals } = useChiralStore((state) => state);
+  const { xRad, yRad, zRad } = useRotationStore((state) => state);
 
   return (
     <>
@@ -22,23 +24,25 @@ export default function Scene() {
         <color attach="background" args={[0.8, 0.8, 0.8]} />
         <ambientLight color={[1, 1, 1]} intensity={0.5} />
         <directionalLight color={[1, 1, 1]} position={[0, 1, 1]} />
-        <ColorSphere position={[0, 0, 0]} baseNode="true" direction="down" />
-        {chirals.map((d, i) => {
-          return (
-            <React.Fragment
-              key={`chiral-${d.direction}-${d.parentGeneration}-${i}`}
-            >
-              <ChiralStructure
-                direction={d.direction}
-                position={d.position}
-                rotation={d.rotation}
-                groupRotation={d.groupRotation}
-                parentGeneration={d.parentGeneration}
-              />
-              ;
-            </React.Fragment>
-          );
-        })}
+        <group rotation={[xRad, yRad, zRad]}>
+          <ColorSphere position={[0, 0, 0]} baseNode="true" direction="down" />
+          {chirals.map((d, i) => {
+            return (
+              <React.Fragment
+                key={`chiral-${d.direction}-${d.parentGeneration}-${i}`}
+              >
+                <ChiralStructure
+                  direction={d.direction}
+                  position={d.position}
+                  rotation={d.rotation}
+                  groupRotation={d.groupRotation}
+                  parentGeneration={d.parentGeneration}
+                />
+                ;
+              </React.Fragment>
+            );
+          })}
+        </group>
         {/* <ChiralStructure position={[0, 0, 0]} rotation={[0, 0, 0]} />
         <ChiralStructure position={[0, 0, 0]} rotation={[0, 0, Math.PI]} />
         <ChiralStructure
