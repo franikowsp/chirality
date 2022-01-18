@@ -5,7 +5,7 @@ export default function CameraControls() {
   const [camera, setCamera] = useState();
   return (
     <>
-      <PerspectiveCamera makeDefault ref={setCamera} position={[100, 0, 0]} />
+      <PerspectiveCamera makeDefault ref={setCamera} position={[0, 0, 100]} />
       <OrbitControls camera={camera} enablePan={false} dampingFactor={1} />
     </>
   );

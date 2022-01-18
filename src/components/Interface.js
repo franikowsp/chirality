@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Controls from "./Interface/Controls";
 import ColorSelection from "./Interface/ColorSelection";
@@ -19,6 +20,9 @@ export default function Interface() {
         </svg>
         <div>
           <RotationSlider />
+        </div>
+        <div>
+          <Link to="/rotation-matrix">Rotation Matrix</Link>
         </div>
       </div>
     </>
