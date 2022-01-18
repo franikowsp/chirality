@@ -1,5 +1,4 @@
 import React from "react";
-// import { useLocation } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import * as THREE from "three";
@@ -8,11 +7,6 @@ import jstat from "jstat";
 
 import CameraControlsMatrix from "./Scene/CameraControlsMatrix.js";
 import Construct from "./Scene/Construct.js";
-// import ChiralStructure from "./Scene/ChiralStructure.js";
-// import ColorSphere from "./Scene/ColorSphere.js";
-
-// import useChiralStore from "../stores/useChiralStore.js";
-import useRotationStore from "../stores/useRotationStore.js";
 
 const generateBaseArray = function (
   start = 0,
@@ -31,8 +25,8 @@ const generateBaseArray = function (
       [`${axis1}Rad`]: degToRad(value),
       [`${axis2}Rad`]: degToRad(superValue),
       [`${axis3}Rad`]: degToRad(0),
-      xPosition: -index * 40 + 150,
-      yPosition: -superIndex * 30 + 100,
+      xPosition: -index * 40 + 110,
+      yPosition: -superIndex * 30 + 90,
       axis1,
       axis2,
       axis3,
@@ -43,21 +37,6 @@ const generateBaseArray = function (
 };
 
 export default function SceneMatrix() {
-  const { xRad, yRad, zRad } = useRotationStore((state) => state);
-
-  // const location = useLocation();
-
-  // if (location.pathname === "/") {
-  //   const element = (
-  //     <Construct
-  //       rotation={[xRad, yRad, zRad]}
-  //       scale={[1, 1, 1]}
-  //       position={[0, 0, 0]}
-  //     />
-  //   );
-  // } else {
-  // }
-
   const baseArray = generateBaseArray();
   console.log(baseArray);
 
@@ -68,7 +47,7 @@ export default function SceneMatrix() {
       <React.Fragment key={`subgraph-${i}`}>
         <Construct
           rotation={[d.xRad, d.yRad, d.zRad]}
-          scale={[0.5, 0.5, 0.5]}
+          scale={0.4}
           position={[d.xPosition, d.yPosition, 0]}
         />
         <Html position={[d.xPosition, d.yPosition, 0]} scale={[7, 7, 7]}>

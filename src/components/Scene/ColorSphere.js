@@ -15,7 +15,7 @@ export default function ColorSphere({
   baseNode = false,
   direction = "down",
 }) {
-  const { add, remove } = useInterfaceStore((state) => state);
+  const { add, remove, colorClick } = useInterfaceStore((state) => state);
   const { addChirals, removeChirals } = useChiralStore((state) => state);
   const [sphereColor, setSphereColor] = useState("#ffffff");
   const [hasChiral, setHasChiral] = useState(false);
@@ -55,7 +55,7 @@ export default function ColorSphere({
           });
           setHasChiral(false);
         } else {
-          setSphereColor(currentColor);
+          colorClick && setSphereColor(currentColor);
         }
       }}
     >

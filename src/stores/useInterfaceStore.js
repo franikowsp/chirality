@@ -2,16 +2,25 @@ import create from "zustand";
 
 const useInterfaceStore = create((set) => ({
   add: false,
+  remove: false,
+  colorClick: true,
   toggleAdd: () =>
     set((state) => ({
       add: !state.add,
-      remove: !state.add === false && state.remove === true,
+      remove: state.add && state.remove && state.colorClick,
+      colorClick: false,
     })),
-  remove: false,
   toggleRemove: () =>
     set((state) => ({
       remove: !state.remove,
-      add: !state.remove === false && state.add === true,
+      add: state.remove && state.add && state.colorClick,
+      colorClick: false,
+    })),
+  activateColorClick: () =>
+    set(() => ({
+      colorClick: true,
+      add: false,
+      remove: false,
     })),
 }));
 

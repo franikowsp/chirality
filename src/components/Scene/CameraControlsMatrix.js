@@ -8,7 +8,7 @@ export default function CameraControlsMatrix() {
       <OrthographicCamera
         makeDefault
         ref={setCamera}
-        zoom={5}
+        zoom={4}
         position={[0, 0, 100]}
       />
       <OrbitControls
