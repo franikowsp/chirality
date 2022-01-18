@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/chirality/static/css/main.372c4630.css",
-    "main.js": "/chirality/static/js/main.0ab89b9f.js",
+    "main.js": "/chirality/static/js/main.d5f318fa.js",
     "index.html": "/chirality/index.html",
     "main.372c4630.css.map": "/chirality/static/css/main.372c4630.css.map",
-    "main.0ab89b9f.js.map": "/chirality/static/js/main.0ab89b9f.js.map"
+    "main.d5f318fa.js.map": "/chirality/static/js/main.d5f318fa.js.map"
   },
   "entrypoints": [
     "static/css/main.372c4630.css",
-    "static/js/main.0ab89b9f.js"
+    "static/js/main.d5f318fa.js"
   ]
 }
