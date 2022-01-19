@@ -7,24 +7,28 @@ import jstat from "jstat";
 
 import CameraControlsMatrix from "./Scene/CameraControlsMatrix.js";
 import Construct from "./Scene/Construct.js";
+import useMatrixStore from "../stores/useMatrixStore.js";
 
-const generateBaseArray = function (
-  start = 0,
-  end = 360,
-  step = 7,
-  axis1 = "x",
-  axis2 = "y"
-) {
-  const axis3 = ["x", "y", "z"].filter((d) => ![axis1, axis2].includes(d));
-  const arr = jstat.jStat(start, end, step)[0];
-  const baseArray = arr.flatMap((superValue, superIndex) => {
-    return arr.map((value, index) => ({
+const getRotationArray = (state) => {
+  const {
+    axes: [axis1, axis2, axis3],
+  } = state;
+
+  const config1 = state[axis1];
+  const config2 = state[axis2];
+  const config3 = state[axis3];
+
+  const arr1 = jstat.jStat(config1.start, config1.end, config1.step)[0];
+  const arr2 = jstat.jStat(config2.start, config2.end, config2.step)[0];
+
+  const rotationArray = arr1.flatMap((superValue, superIndex) => {
+    return arr2.map((value, index) => ({
       [axis1]: value,
       [axis2]: superValue,
-      [axis3]: 0,
+      [axis3]: config3.value,
       [`${axis1}Rad`]: degToRad(value),
       [`${axis2}Rad`]: degToRad(superValue),
-      [`${axis3}Rad`]: degToRad(0),
+      [`${axis3}Rad`]: degToRad(config3.value),
       xPosition: index * 40 - 130,
       yPosition: -superIndex * 30 + 90,
       axis1,
@@ -33,16 +37,15 @@ const generateBaseArray = function (
     }));
   });
 
-  return baseArray;
+  return rotationArray;
 };
 
 export default function SceneMatrix() {
-  const baseArray = generateBaseArray();
-  console.log(baseArray);
+  const state = useMatrixStore((state) => state);
 
-  const element = baseArray.map((d, i) => {
-    // const xRotation = { deg: d, rad: degToRad(d) };
+  const rotationArray = getRotationArray(state);
 
+  const element = rotationArray.map((d, i) => {
     return (
       <React.Fragment key={`subgraph-${i}`}>
         <Construct
@@ -51,9 +54,9 @@ export default function SceneMatrix() {
           position={[d.xPosition, d.yPosition, 0]}
         />
         <Html position={[d.xPosition, d.yPosition, 0]} scale={[7, 7, 7]}>
-          <div className="label">{`${d.axis1} = ${d[d.axis1]}; ${d.axis2} = ${
-            d[d.axis2]
-          }`}</div>
+          <div className="label">{`${d.axis1} = ${Math.round(d[d.axis1])}; ${
+            d.axis2
+          } = ${Math.round(d[d.axis2])}`}</div>
         </Html>
       </React.Fragment>
     );

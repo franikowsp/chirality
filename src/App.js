@@ -5,6 +5,7 @@ import Scene from "./components/Scene";
 import Interface from "./components/Interface";
 
 import SceneMatrix from "./components/SceneMatrix";
+import InterfaceMatrix from "./components/InterfaceMatrix";
 
 function Home() {
   return (
@@ -19,6 +20,7 @@ function RotationMatrix() {
   return (
     <>
       <SceneMatrix />
+      <InterfaceMatrix />
     </>
   );
 }
