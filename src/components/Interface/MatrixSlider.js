@@ -15,9 +15,8 @@ import AxisSelector from "./AxisSelector";
 //   }),
 
 export default function MatrixSlider() {
-  const { x, y, z, axes, updateConfig, initialiseMatrix } = useMatrixStore(
-    (state) => state
-  );
+  const { x, y, z, axes, updateConfig, initialiseMatrix, toggleLabels } =
+    useMatrixStore((state) => state);
 
   const getRotationArray = (axisName, axis, axes) => {
     const [axis1, axis2, axis3] = axes;
@@ -109,7 +108,8 @@ export default function MatrixSlider() {
           );
         })}
       </div>
-      <button onClick={initialiseMatrix}>Initialize View</button>
+      <button onClick={initialiseMatrix}>Initialize view</button>
+      <button onClick={toggleLabels}>Toggle labels</button>
     </>
   );
 }

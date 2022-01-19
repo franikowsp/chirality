@@ -53,7 +53,11 @@ export default function SceneMatrix() {
           scale={0.4}
           position={[d.xPosition, d.yPosition, 0]}
         />
-        <Html position={[d.xPosition, d.yPosition, 0]} scale={[7, 7, 7]}>
+        <Html
+          position={[d.xPosition, d.yPosition, 0]}
+          scale={[7, 7, 7]}
+          style={{ display: state.labels ? "block" : "none" }}
+        >
           <div className="label">{`${d.axis1} = ${Math.round(d[d.axis1])}; ${
             d.axis2
           } = ${Math.round(d[d.axis2])}`}</div>
