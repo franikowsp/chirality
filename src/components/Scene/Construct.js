@@ -14,7 +14,7 @@ export default function Construct({ rotation, scale, position }) {
       {chirals.map((d, i) => {
         return (
           <React.Fragment
-            key={`chiral-${d.direction}-${d.parentGeneration}-${i}`}
+            key={`chiral-${d.direction}-${d.parentGeneration}-${d.parentGenerationId}-${i}`}
           >
             <ChiralStructure
               direction={d.direction}
@@ -22,6 +22,7 @@ export default function Construct({ rotation, scale, position }) {
               rotation={d.rotation}
               groupRotation={d.groupRotation}
               parentGeneration={d.parentGeneration}
+              parentGenerationId={d.parentGenerationId}
             />
             ;
           </React.Fragment>

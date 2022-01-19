@@ -12,17 +12,16 @@ export default function ColorSphere({
   groupRotation = [0, 0, 0],
   generation = 0,
   generationId = 0,
-  baseNode = false,
   direction = "down",
+  colorId = 0,
 }) {
   const { add, remove, colorClick } = useInterfaceStore((state) => state);
   const { addChirals, removeChirals } = useChiralStore((state) => state);
-  const [sphereColor, setSphereColor] = useState("#ffffff");
   const [hasChiral, setHasChiral] = useState(false);
 
-  const { currentColor } = useColorsStore((state) => state);
+  const { sphereColors, setSphereColors } = useColorsStore((state) => state);
 
-  const { color } = useSpring({ color: sphereColor });
+  const { color } = useSpring({ color: sphereColors[colorId] });
 
   return (
     <mesh
@@ -38,6 +37,7 @@ export default function ColorSphere({
           );
 
           const newPosition = [x, y, z];
+
           addChirals({
             position: newPosition,
             groupRotation: groupRotation,
@@ -55,7 +55,7 @@ export default function ColorSphere({
           });
           setHasChiral(false);
         } else {
-          colorClick && setSphereColor(currentColor);
+          colorClick && setSphereColors(colorId);
         }
       }}
     >

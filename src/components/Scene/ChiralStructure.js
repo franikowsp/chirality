@@ -28,12 +28,35 @@ const clockArrayGenerate = (direction) => {
   });
 };
 
+const getColorId = (
+  parentGeneration,
+  parentGenerationId,
+  direction,
+  generationId
+) => {
+  const generation = parentGeneration + 1;
+  let id;
+  if (generation === 0) {
+    id = 0;
+  } else {
+    const directionCode = direction === "up" ? 0 : 12;
+    if (generation === 1) {
+      id = directionCode + (generationId + 1);
+    } else if (generation === 2) {
+      id = directionCode + 3 * (parentGenerationId + 1) + (generationId + 1);
+    }
+  }
+
+  return id;
+};
+
 export default function ChiralStructure({
   direction = "up",
   position = [0, 0, 0],
   rotation = [0, 0, 0],
   groupRotation = [0, 0, 0],
   parentGeneration = 0,
+  parentGenerationId = 0,
 }) {
   const clockArray = clockArrayGenerate(direction);
 
@@ -51,7 +74,14 @@ export default function ChiralStructure({
                 groupRotation={d.rotationCylinderGroup}
                 generation={parentGeneration + 1}
                 generationId={i}
+                parentGenerationId={parentGenerationId}
                 direction={direction}
+                colorId={getColorId(
+                  parentGeneration,
+                  parentGenerationId,
+                  direction,
+                  i
+                )}
               />
               <group
                 rotation={d.rotationCylinderGroup}

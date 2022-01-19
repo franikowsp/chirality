@@ -25,7 +25,7 @@ const generateBaseArray = function (
       [`${axis1}Rad`]: degToRad(value),
       [`${axis2}Rad`]: degToRad(superValue),
       [`${axis3}Rad`]: degToRad(0),
-      xPosition: -index * 40 + 110,
+      xPosition: index * 40 - 130,
       yPosition: -superIndex * 30 + 90,
       axis1,
       axis2,
